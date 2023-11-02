@@ -11,3 +11,9 @@ class Bank:
             return True
         else:
             return False
+
+    def getCustomerById(self, id):
+        for customer in self.customers:
+            if customer.customer_id == id:
+                return customer
+        return False
