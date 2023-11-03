@@ -123,7 +123,23 @@ def function4():
         print('Withdraw failed')
 
 def function5():
-    pass
+    cus_id = input("Nhap Id khach hang: ")
+    if activeBank.getCustomerById(cus_id):
+        customer_info = activeBank.getCustomerById(cus_id)
+    else:
+        print("Can't find customer ID")
+        return
+    acc_id = input("Input account number: ")
+    if customer_info.getAccountById(acc_id):
+        acc_info = customer_info.getAccountById(acc_id)
+    else:
+        print("Can't find account number")
+        return
+    pin_number = input('Input pin number: ')
+    if acc_info.pin_number != pin_number:
+        print("Wrong pin")
+        return
+    print(acc_info.displayTransactions())
 
 
 if __name__ == "__main__":

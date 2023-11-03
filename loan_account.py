@@ -1,6 +1,7 @@
 from datetime import datetime
 from tabulate import tabulate
 from bank_account import BankAccount
+from transaction import Transaction
 
 
 class LoanAccount(BankAccount):
@@ -24,8 +25,12 @@ class LoanAccount(BankAccount):
     def withdraw(self, amount) -> bool:
         if self.isAccepted(amount):
             self.balance -= (amount + self.getFee(amount))
+            transaction = Transaction(self.account_number, amount, 'True')
+            self.transactions.append(transaction)
             return True
         else:
+            transaction = Transaction(self.account_number, amount, 'False')
+            self.transactions.append(transaction)
             return False
 
     def log(self, amount, bank_name):
@@ -46,3 +51,4 @@ class LoanAccount(BankAccount):
 
         colalign = ('left', 'right')
         return tabulate(data, tablefmt='pretty', colalign=colalign)
+
