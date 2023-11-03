@@ -94,7 +94,33 @@ def function3():
     print('Add Loans account successful')
 
 def function4():
-    pass
+    cus_id = input("Nhap Id khach hang: ")
+    if activeBank.getCustomerById(cus_id):
+        customer_info = activeBank.getCustomerById(cus_id)
+    else:
+        print("Can't find customer ID")
+        return
+    acc_id = input("Input account number: ")
+    if customer_info.getAccountById(acc_id):
+        acc_info = customer_info.getAccountById(acc_id)
+    else:
+        print("Can't find account number")
+        return
+    pin_number = input('Input pin number: ')
+    if acc_info.pin_number != pin_number:
+        print("Wrong pin")
+        return
+    amount = input("Enter withdraw amount (Only number): ")
+    while not amount.isnumeric():
+        amount = input("Enter withdraw amount (Only number): ")
+        if not amount.isnumeric():
+            print('Invalid input!!')
+    amount = float(amount)
+    if acc_info.withdraw(amount):
+        print('Withdraw successful')
+        print(acc_info.log(amount, activeBank.bank_name))
+    else:
+        print('Withdraw failed')
 
 def function5():
     pass
@@ -123,5 +149,7 @@ if __name__ == "__main__":
                 function4()
             case "5":
                 function5()
+            case "0":
+                exit()
         input("Press \"Enter\" to return choose another function...")
         clear_screen()
