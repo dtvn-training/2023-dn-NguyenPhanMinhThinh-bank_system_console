@@ -1,5 +1,8 @@
 from withdraw import Withdraw
-class BankAccount(Withdraw):
+from report import Report
+
+
+class BankAccount(Withdraw, Report):
     def __init__(self, account_number, pin_number, customer_id, balance, is_premium):
         self.account_number = account_number
         self.pin_number = pin_number
@@ -19,4 +22,5 @@ class BankAccount(Withdraw):
     def withdraw(self, amount) -> bool:
         pass
 
-
+    def log(self, amount, bank_name):
+        pass

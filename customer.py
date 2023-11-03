@@ -35,6 +35,13 @@ class Customer(User):
             if account.account_number == account_number:
                 return True
         return False
+
+    def getAccountById(self, account_number):
+        for account in self.accounts:
+            if account.account_number == account_number:
+                return account
+        return False
+
     def display_information(self):
         premium = 'PREMIUM' if self.isPremium else ''
         data = [[self.customer_id, 'FUNIX', premium, self.total_balance()]]
@@ -47,4 +54,4 @@ class Customer(User):
             account_info.append(str(account.balance))
             data.append(account_info)
         colalign = ("right", "right", "right", "right")
-        return tabulate(data, tablefmt = 'pretty', colalign = colalign)
+        return tabulate(data, tablefmt='pretty', colalign=colalign)
